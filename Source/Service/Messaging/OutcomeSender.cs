@@ -20,6 +20,7 @@ namespace Service.Messaging
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
             if (fileProcessorConfig == null) throw new ArgumentNullException(nameof(fileProcessorConfig));
+            /*
             var connectionFactory = new ConnectionFactory() { 
                 HostName = fileProcessorConfig.AdaptationRequestQueueHostname,
                 Port = fileProcessorConfig.AdaptationRequestQueuePort,
@@ -30,6 +31,7 @@ namespace Service.Messaging
             _channel = _connection.CreateModel();
 
             _logger.LogInformation($"OutcomeSender Connection established to {fileProcessorConfig.AdaptationRequestQueueHostname}");
+            */
         }
 
         protected virtual void Dispose(bool disposing)
@@ -55,6 +57,7 @@ namespace Service.Messaging
 
         public void Send(string status, string fileId, string replyTo, IDictionary<string, string> optionalHeaders = null)
         {
+            /*
             var headers = new Dictionary<string, object>()
                 {
                     { "file-id", fileId },
@@ -74,6 +77,8 @@ namespace Service.Messaging
             _channel.BasicPublish("", replyTo, basicProperties: replyProps);
 
             _logger.LogInformation($"Sent Message, ReplyTo: { replyTo}, FileId: {fileId}, Outcome: {status}");
+            */
+            _logger.LogInformation("Not sending the message here");
         }
     }
 }

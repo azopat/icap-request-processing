@@ -1,5 +1,11 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
+FROM golang:alpine AS gobuilder
+WORKDIR /go/src/github.com/k8-proxy/go-k8s-process
+COPY go-k8s-process .
+RUN cd cmd \
+    && env GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o  go-k8s-process .
+
 FROM mcr.microsoft.com/dotnet/core/runtime:3.1-buster-slim AS base
 RUN apt-get update && apt-get install -y libfreetype6 fontconfig-config libc6
 WORKDIR /app
@@ -26,4 +32,8 @@ RUN dotnet publish Service.csproj -c Release -o /app
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "Service.dll"]
+COPY --from=gobuilder /go/src/github.com/k8-proxy/go-k8s-process/cmd/go-k8s-process /app/go-k8s-process
+COPY entrypoint.sh /
+RUN  chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]

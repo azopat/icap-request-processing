@@ -1,3 +1,6 @@
 [submodule "lib"]
 	path = lib
 	url = https://github.com/filetrust/sdk-rebuild
+[submodule "go-k8s-process"]
+	path = go-k8s-process
+	url = https://github.com/k8-proxy/go-k8s-process.git
