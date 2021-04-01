@@ -33,7 +33,6 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
 
-COPY adaptation /app/adaptation
 COPY appsettings.json /app/config/appsettings.json
 
 COPY --from=gobuilder /go/src/github.com/k8-proxy/go-k8s-process/cmd/go-k8s-process /app/go-k8s-process
