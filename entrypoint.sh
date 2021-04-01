@@ -1,3 +1,4 @@
 #!/bin/bash
 
-/app/go-k8s-process
+/app/adaptation
+#dotnet Service.dll

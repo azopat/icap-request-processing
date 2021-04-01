@@ -1,4 +1,4 @@
-namespace Glasswall.Core.Engine.Messaging
+﻿namespace Glasswall.Core.Engine.Messaging
 {
     public enum FileType
     {
@@ -23,15 +23,15 @@ namespace Glasswall.Core.Engine.Messaging
         Rtf = 28,
         Bmp = 29,
         Tiff = 30,
-        Pe = 31,
-        Macho = 32,
-        Elf = 33,
-        Mp4 = 34,
-        Mp3 = 35,
-        Mp2 = 36,
-        Wav = 37,
-        Mpg = 38,
-        Coff = 39,
+        // Pe = 31,
+        // Macho = 32,
+        //Elf = 33,
+        //Mp4 = 34,
+        //Mp3 = 35,
+        //Mp2 = 36,
+        //Wav = 37,
+        //Mpg = 38,
+        // Coff = 39
         Zip = 256,
         Gzip = 257,
         //Bzip2 = 258,

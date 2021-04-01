@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
-using Service.Configuration;
 using System;
 using System.Collections.Generic;
 

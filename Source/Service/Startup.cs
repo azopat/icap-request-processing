@@ -9,13 +9,8 @@ using Glasswall.Core.Engine.FileProcessing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Service.Configuration;
-using Service.Engine;
 using Service.ErrorReport;
 using Service.Messaging;
-using Service.NCFS;
-using Service.Storage;
-using Service.TransactionEvent;
 
 namespace Service
 {
@@ -54,18 +49,13 @@ namespace Service
             services.AddTransient<IFileProtector, FileProtector>();
             services.AddTransient<IFileAnalyser, FileAnalyser>();
             services.AddTransient<IAdaptor<ContentManagementFlags, string>, GlasswallConfigurationAdaptor>();
-            services.AddTransient<IGlasswallEngineService, GlasswallEngineService>();
-            services.AddTransient<IProcessor, Processor>();
-            services.AddTransient<IAdaptationRequestProcessor, AdaptationRequestProcessor>();
-            services.AddTransient<IAdaptationRequestController, AdaptationRequestController>();
-            services.AddTransient<IFileProcessor, FileProcessor>();
+            services.AddTransient<IGlasswallFileProcessor, GlasswallFileProcessor>();
+            services.AddTransient<ITransactionEventProcessor, TransactionEventProcessor>();
             services.AddScoped<IOutcomeSender, OutcomeSender>();
             services.AddScoped<ITransactionEventSender, TransactionEventSender>();
             services.AddScoped<IArchiveRequestSender, ArchiveRequestSender>();
             services.AddTransient<IFileManager, LocalFileManager>();
             services.AddTransient<IErrorReportGenerator, HtmlErrorReportGenerator>();
-            services.AddTransient<INcfsProcessor, NcfsProcessor>();
-            services.AddTransient<INcfsClient, NcfsClient>();
             services.AddSingleton<IFileProcessorConfig>(Config);
 
             var p = (int)Environment.OSVersion.Platform;

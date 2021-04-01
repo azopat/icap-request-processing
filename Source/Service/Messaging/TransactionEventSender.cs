@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
-using Service.Configuration;
 using Service.StoreMessages.Events;
 using System;
 using System.Text;

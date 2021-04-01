@@ -1,7 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Prometheus;
-using Service.Configuration;
-using Service.TransactionEvent;
 
 namespace Service
 {
@@ -18,21 +15,8 @@ namespace Service
             // Get Service and call method
             using (var scope = serviceProvider.CreateScope())
             {
-                var configuration = scope.ServiceProvider.GetService<IFileProcessorConfig>();
-
-                var pusher = new MetricPusher(new MetricPusherOptions
-                {
-                    Endpoint = configuration.MetricsEndpoint,
-                    Job = "icap-request-processing",
-                    IntervalMilliseconds = 5
-                });
-
-                pusher.Start();
-
-                var service = scope.ServiceProvider.GetService<IProcessor>();
+                var service = scope.ServiceProvider.GetService<ITransactionEventProcessor>();
                 service.Process();
-
-                pusher.Stop();
             }
         }
     }

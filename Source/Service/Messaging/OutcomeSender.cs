@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
-using Service.Configuration;
 using System;
 using System.Collections.Generic;
 
@@ -55,7 +54,7 @@ namespace Service.Messaging
             GC.SuppressFinalize(this);
         }
 
-        public void Send(string status, string fileId, string replyTo, IDictionary<string, string> optionalHeaders = null)
+        public void Send(string status, string fileId, string replyTo)
         {
             /*
             var headers = new Dictionary<string, object>()
@@ -63,14 +62,6 @@ namespace Service.Messaging
                     { "file-id", fileId },
                     { "file-outcome", status },
                 };
-
-            if (optionalHeaders != null)
-            {
-                foreach (var header in optionalHeaders)
-                {
-                    headers.Add(header.Key, header.Value);
-                }
-            }
 
             var replyProps = _channel.CreateBasicProperties();
             replyProps.Headers = headers;
